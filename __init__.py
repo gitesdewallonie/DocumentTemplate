@@ -10,30 +10,13 @@
 # FOR A PARTICULAR PURPOSE
 #
 ##############################################################################
-__version__='$Revision: 1.9 $'[11:-2]
+__doc__='''Package wrapper for Document Template
 
-from DocumentTemplate.DT_Util import parse_params, name_param
+This wrapper allows the (now many) document template modules to be
+segregated in a separate package.
 
-class ReturnTag:
-    name='return'
-    expr=None
+$Id$'''
+__version__='$Revision: 1.18 $'[11:-2]
 
-    def __init__(self, args):
-        args = parse_params(args, name='', expr='')
-        name, expr = name_param(args, 'var', 1)
-        self.__name__ = name
-        self.expr = expr
-
-    def render(self, md):
-        if self.expr is None:
-            val = md[self.__name__]
-        else:
-            val = self.expr.eval(md)
-
-        raise DTReturn(val)
-
-    __call__ = render
-
-class DTReturn:
-    def __init__(self, v):
-        self.v = v
+from DocumentTemplate.DT_String import String, File
+from DocumentTemplate.DT_HTML import HTML, HTMLDefault, HTMLFile
