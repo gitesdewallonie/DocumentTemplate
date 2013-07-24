@@ -923,7 +923,7 @@ _join_unicode(PyObject *prejoin)
             PyObject *item = PyList_GetItem(list,i);
             if(PyString_Check(item))
             {
-                PyObject *unicode = PyUnicode_DecodeLatin1(PyString_AsString(item),PyString_Size(item),NULL);
+                PyObject *unicode = PyUnicode_DecodeUTF8(PyString_AsString(item),PyString_Size(item),NULL);
                 if(unicode)
                 {
                     PyList_SetItem(list,i,unicode);
@@ -958,7 +958,7 @@ static struct PyMethodDef Module_Level__methods[] = {
    "join a list of plain strings into a single plain string,\n"
    "a list of unicode strings into a single unicode strings,\n"
    "or a list containing a mix into a single unicode string with\n"
-   "the plain strings converted from latin-1"},
+   "the plain strings converted from utf-8"},
   {"safe_callable", (PyCFunction)safe_callable,	METH_VARARGS,
    "callable() with a workaround for a problem with ExtensionClasses\n"
    "and __call__()."},
